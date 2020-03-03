@@ -1,6 +1,9 @@
 #pragma once
 #include "Ground/CollisionModel.h"
 #include "Camera/Camera.h"
+#include "Util/KeyTrigger.h"
+
+class WayPoint;
 
 class World{
 public:
@@ -11,5 +14,8 @@ public:
 private:
 	MyCamera camera;
 	CollisionModel ground;
+	KeyTrigger mouseLB{ VK_LBUTTON};
+
+	WayPoint* selectWayPoint = nullptr;
 };
 

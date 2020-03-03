@@ -92,6 +92,7 @@
       <AdditionalIncludeDirectories>$(ProjectDir)\Project\;$(ProjectDir);$(SolutionDir)Engine\;$(SolutionDir)\Engine\Effekseer;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
       <PreprocessorDefinitions>_CRT_NON_CONFORMING_SWPRINTFS;_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PrecompiledHeader>Use</PrecompiledHeader>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -109,6 +110,7 @@
       <AdditionalIncludeDirectories>$(ProjectDir)\Project\;$(ProjectDir);$(SolutionDir)Engine\;$(SolutionDir)\Engine\Effekseer;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
       <PreprocessorDefinitions>_CRT_NON_CONFORMING_SWPRINTFS;_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PrecompiledHeader>Use</PrecompiledHeader>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -128,6 +130,7 @@
       <AdditionalIncludeDirectories>$(ProjectDir)\Project\;$(ProjectDir);$(SolutionDir)Engine\;$(SolutionDir)\Engine\Effekseer;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
       <PreprocessorDefinitions>_CRT_NON_CONFORMING_SWPRINTFS;_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PrecompiledHeader>Use</PrecompiledHeader>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -149,6 +152,7 @@
       <AdditionalIncludeDirectories>$(ProjectDir)\Project\;$(ProjectDir);$(SolutionDir)Engine\;$(SolutionDir)\Engine\Effekseer;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
       <PreprocessorDefinitions>_CRT_NON_CONFORMING_SWPRINTFS;_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PrecompiledHeader>Use</PrecompiledHeader>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -160,9 +164,11 @@
     </MeshContentTask>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="Project\Util\KeyTrigger.h" />
     <ClInclude Include="Project\Camera\Camera.h" />
     <ClInclude Include="Project\Ground\CollisionModel.h" />
     <ClInclude Include="Project\stdafx.h" />
+    <ClInclude Include="Project\WayPoint\Loot.h" />
     <ClInclude Include="Project\World\World.h" />
     <ClInclude Include="Project\WayPoint\WayPoint.h" />
   </ItemGroup>
@@ -170,7 +176,14 @@
     <ClCompile Include="Project\Camera\Camera.cpp" />
     <ClCompile Include="Project\Ground\CollisionModel.cpp" />
     <ClCompile Include="Project\main.cpp" />
-    <ClCompile Include="Project\stdafx.cpp" />
+    <ClCompile Include="Project\stdafx.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="Project\Util\KeyTrigger.cpp" />
+    <ClCompile Include="Project\WayPoint\Loot.cpp" />
     <ClCompile Include="Project\World\World.cpp" />
     <ClCompile Include="Project\WayPoint\WayPoint.cpp" />
   </ItemGroup>
@@ -183,7 +196,8 @@
     <MeshContentTask Include="Assets\modelData\FirstStage.fbx">
       <FileType>Document</FileType>
     </MeshContentTask>
-    <MeshContentTask Include="Assets\modelData\Skeleton.fbx" />
+    <MeshContentTask Include="Assets\modelData\Loot.fbx" />
+    <MeshContentTask Include="Assets\modelData\WayPoint.fbx" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

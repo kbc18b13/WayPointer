@@ -1,6 +1,8 @@
 #include "stdafx.h"
 #include "WayPoint.h"
+#include "physics/CollisionAttr.h"
 
-WayPoint::WayPoint(){
-	r.Init( L"Assets/modelData/Skeleton.cmo" );
+WayPoint::WayPoint() : collision( L"Assets/modelData/WayPoint.cmo" ){
+	collision.SetPointer( this );
+	collision.SetIndex( enCollisionAttr_WayPoint );
 }

@@ -1,4 +1,6 @@
 #pragma once
+#include "Util/KeyTrigger.h"
+
 class MyCamera{
 public:
 	void Update();
@@ -25,8 +27,11 @@ public:
 	}
 
 private:
+	KeyTrigger mouseM{ VK_MBUTTON };
+
+	bool mouseLock = false;
 
 	float moveSpeed = 10;
-	CVector3 cameraVec = {1, 0, 0};
+	CVector3 cameraVec = { 1, 0, 0 };
 };
 

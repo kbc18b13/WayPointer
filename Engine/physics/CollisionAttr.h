@@ -10,6 +10,6 @@ enum EnCollisionAttr{
 	enCollisionAttr_Ground,
 	enCollisionAttr_Character,
     enCollisionAttr_Ghost,
-	enCollisionAttr_Player,		//以下にユーザー定義のコリジョン属性を設定する。
-	enCollisionAttr_Enemy
+	enCollisionAttr_WayPoint,		//以下にユーザー定義のコリジョン属性を設定する。
+	enCollisionAttr_Loot
 };

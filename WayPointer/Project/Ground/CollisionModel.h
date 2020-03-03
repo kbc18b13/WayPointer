@@ -16,6 +16,14 @@ public:
 
 	void SetScale( const CVector3& scale );
 
+	void SetPointer( void* p ){
+		m_collider.GetRigidBody()->GetBody()->setUserPointer( p );
+	}
+
+	void SetIndex( int index ){
+		m_collider.GetRigidBody()->GetBody()->setUserIndex( index );
+	}
+
 private:
 	SkinModelRender m_model;
 	PhysicsStaticObject m_collider;

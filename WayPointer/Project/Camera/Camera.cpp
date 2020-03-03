@@ -2,7 +2,13 @@
 #include "Camera.h"
 
 void MyCamera::Update(){
-	if( GetAsyncKeyState( VK_MBUTTON ) ){
+	//マウスによる視点移動モードの切り替え
+	mouseM.Update();
+	if( mouseM.IsTrigger() ){
+		mouseLock = !mouseLock;
+	}
+
+	if( mouseLock ){
 		POINT p;
 		GetCursorPos(&p);
 

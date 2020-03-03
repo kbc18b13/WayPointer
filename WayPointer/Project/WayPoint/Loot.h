@@ -1,9 +1,9 @@
 #pragma once
 #include "Ground/CollisionModel.h"
 
-class WayPoint : public IGameObject{
+class Loot : public IGameObject{
 public:
-	WayPoint();
+	Loot();
 
 	void Update() override{
 	}
