@@ -65,7 +65,7 @@ public:
     /// ˆÊ’u‚ðŽæ“¾
     /// </summary>
     /// <returns></returns>
-    CVector3 GetPos(){
+    CVector3 GetPos() const{
         return m_pos;
     }
 

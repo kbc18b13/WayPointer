@@ -27,16 +27,16 @@ public:
 		*@param[in]	pos			座標。
 		*@param[in]	rot			回転。
 		*/
-	void CreateMeshObject( SkinModel& skinModel,const CVector3& pos,const CQuaternion& rot ){
+	void CreateMeshObject( SkinModel& skinModel,const CVector3& pos,const CQuaternion& rot , int flag = 1){
 		//メッシュコライダーを作成。
 		m_meshCollider.CreateFromSkinModel( skinModel );
-		CreateRigidBody( pos, rot );
+		CreateRigidBody( pos, rot , flag);
 	}
 
-	void CreateMeshObject( const wchar_t* modelPath, const CVector3& pos, const CQuaternion& rot ){
+	void CreateMeshObject( const wchar_t* modelPath, const CVector3& pos, const CQuaternion& rot, int flag = 1 ){
 		//メッシュコライダーを作成。
 		m_meshCollider.CreateFromCMOFile( modelPath );
-		CreateRigidBody( pos, rot );
+		CreateRigidBody( pos, rot , flag);
 	}
 	
 	//位置を設定
@@ -66,7 +66,7 @@ public:
 	}
 
 private:
-	void CreateRigidBody( CVector3 pos, CQuaternion rot );
+	void CreateRigidBody( CVector3 pos, CQuaternion rot , int flag);
 	MeshCollider m_meshCollider;		//!<メッシュコライダー。
 	RigidBody m_rigidBody;				//!<剛体。
 };

@@ -2,12 +2,12 @@
 #include "CollisionModel.h"
 #include "physics/CollisionAttr.h"
 
-CollisionModel::CollisionModel( const wchar_t* modelPath, const wchar_t* collisionModelPath ){
+CollisionModel::CollisionModel( const wchar_t* modelPath, const wchar_t* collisionModelPath, int flag){
 	m_model.Init( modelPath );
 	if( !collisionModelPath ){
-		m_collider.CreateMeshObject( m_model.GetModel(), { 0,0,0 }, CQuaternion::Identity() );
+		m_collider.CreateMeshObject( m_model.GetModel(), { 0,0,0 }, CQuaternion::Identity() , flag);
 	} else{
-		m_collider.CreateMeshObject( collisionModelPath, { 0,0,0 }, CQuaternion::Identity() );
+		m_collider.CreateMeshObject( collisionModelPath, { 0,0,0 }, CQuaternion::Identity() , flag);
 	}
 }
 

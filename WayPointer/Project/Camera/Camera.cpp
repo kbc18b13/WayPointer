@@ -16,7 +16,8 @@ void MyCamera::Update(){
 		{
 			HWND hWnd = g_graphicsEngine->GetWindowHundle();
 			RECT rect;
-			GetClientRect( hWnd, &rect );
+			POINT wPos;
+			GetWindowRect( hWnd, &rect );
 			center.x = ( rect.left + rect.right ) / 2;
 			center.y = ( rect.top + rect.bottom ) / 2;
 		}

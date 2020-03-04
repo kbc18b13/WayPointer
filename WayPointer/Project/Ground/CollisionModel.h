@@ -3,12 +3,12 @@
 class SkinModelRender;
 class CollisionModel {
 public:
-	CollisionModel(const wchar_t* modelPath, const wchar_t* collisionModelPath = nullptr);
+	CollisionModel(const wchar_t* modelPath, const wchar_t* collisionModelPath = nullptr, int flag = 1);
 	~CollisionModel();
 
 	void SetPos(const CVector3& pos);
 
-	CVector3 GetPos(){
+	CVector3 GetPos() const{
 		return m_model.GetPos();
 	}
 
@@ -22,6 +22,10 @@ public:
 
 	void SetIndex( int index ){
 		m_collider.GetRigidBody()->GetBody()->setUserIndex( index );
+	}
+
+	SkinModelRender& GetModel(){
+		return m_model;
 	}
 
 private:

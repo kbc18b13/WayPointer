@@ -4,6 +4,7 @@
 #include "Util/KeyTrigger.h"
 
 class WayPoint;
+class Loot;
 
 class World{
 public:
@@ -12,10 +13,14 @@ public:
 	void Update();
 
 private:
+	btCollisionWorld::ClosestRayResultCallback rayTest(float length, int mask = 0xffffffff);
+
 	MyCamera camera;
 	CollisionModel ground;
 	KeyTrigger mouseLB{ VK_LBUTTON};
+	KeyTrigger mouseRB{ VK_RBUTTON };
 
 	WayPoint* selectWayPoint = nullptr;
+	Loot* creatingLoot = nullptr;
 };
 

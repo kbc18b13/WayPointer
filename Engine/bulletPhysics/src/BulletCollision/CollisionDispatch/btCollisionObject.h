@@ -129,9 +129,7 @@ public:
 		CF_DISABLE_SPU_COLLISION_PROCESSING = 64,//disable parallel/SPU processing
 
 		//以下ユーザー定義
-		CF_Enemy = 128,
-		CF_Player = 256,
-		CF_Ground  = 512,
+		CF_Loot = 128,
 	};
 
 	enum	CollisionObjectTypes

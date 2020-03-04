@@ -15,7 +15,7 @@ PhysicsStaticObject::~PhysicsStaticObject()
 	g_physics.RemoveRigidBody(m_rigidBody);
 }
 
-void PhysicsStaticObject::CreateRigidBody( CVector3 pos, CQuaternion rot ){
+void PhysicsStaticObject::CreateRigidBody( CVector3 pos, CQuaternion rot , int flag){
 	//剛体を作成、
 	RigidBodyInfo rbInfo;
 	rbInfo.collider = &m_meshCollider; //剛体に形状(コライダー)を設定する。
@@ -23,6 +23,7 @@ void PhysicsStaticObject::CreateRigidBody( CVector3 pos, CQuaternion rot ){
 	rbInfo.pos = pos;
 	rbInfo.rot = rot;
 	m_rigidBody.Create( rbInfo );
+	m_rigidBody.GetBody()->setCollisionFlags( flag );
 	//剛体を物理ワールドに追加する。
 	g_physics.AddRigidBody( m_rigidBody );
 }
