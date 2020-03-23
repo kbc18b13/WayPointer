@@ -16,30 +16,39 @@ World::World() : ground( L"Assets/modelData/FirstStage.cmo" ){
 	g_graphicsEngine->GetAmbientLight().Apply();
 }
 
+World::~World(){}
+
 void World::Update(){
 	camera.Update();
 	mouseLB.Update();
 	mouseRB.Update();
+
+	//ルート建設中
 	if( creatingLoot ){
 		auto cb = rayTest(1000, ~btCollisionObject::CollisionFlags::CF_Loot);
 
+		//ルートの先をレイテストで出す
 		CVector3 targetPos;
-		bool isLookWayP = false;
+		WayPoint* hitWp = nullptr;
 		if( cb.hasHit() ){
-			if(cb.m_collisionObject->getUserIndex() == enCollisionAttr_WayPoint ){
-				targetPos = static_cast<WayPoint*>( cb.m_collisionObject->getUserPointer() )->GetPos();
-				isLookWayP = true;
+			//視線の先がウェイポイントならそこを指す
+			if( cb.m_collisionObject->getUserIndex() == enCollisionAttr_WayPoint ){
+				hitWp = static_cast<WayPoint*>( cb.m_collisionObject->getUserPointer() );
+				targetPos = hitWp->GetPos();
 			} else{
 				targetPos = cb.m_hitPointWorld;
 			}
 		} else{
 			targetPos = g_camera3D.GetPosition() + camera.GetFrontVec() * 1000;
 		}
-
 		creatingLoot->SetTargetPos( targetPos );
 
+		//左クリックで確定。ウェイポイントを選択してなければルートを削除。
 		if( mouseLB.IsTrigger() ){
-			if( !isLookWayP ){
+			if( hitWp != nullptr ){
+				creatingLoot->SetTargetWayPoint( hitWp);
+				selectWayPoint->Connect( hitWp );
+			} else{
 				DeleteGO( creatingLoot );
 			}
 			creatingLoot = nullptr;
@@ -47,6 +56,7 @@ void World::Update(){
 			selectWayPoint = nullptr;
 		}
 
+	//何もしてない状態。クリックを感知。
 	} else if( mouseLB.IsTrigger() || mouseRB.IsTrigger() ){
 		auto cb = rayTest(1000);
 
@@ -57,7 +67,7 @@ void World::Update(){
 			if( mouseRB.IsTrigger() ){
 				//地面にクリックしたらウェイポイント設置
 				if( col->getUserIndex() == enCollisionAttr_Ground ){
-					NewGO<WayPoint>( 0 )->SetPos( pos );
+					AddWayPoint( pos );
 				}
 			}
 
@@ -70,8 +80,7 @@ void World::Update(){
 					} else{
 						selectWayPoint = static_cast<WayPoint*>( col->getUserPointer() );
 						selectWayPoint->TurnSelected();
-						creatingLoot = NewGO<Loot>( 0 );
-						creatingLoot->SetPos( selectWayPoint->GetPos());
+						creatingLoot = NewGO<Loot>( 0 , selectWayPoint);
 					}
 				}
 			}
@@ -87,4 +96,11 @@ btCollisionWorld::ClosestRayResultCallback World::rayTest(float length, int mask
 	g_physics.GetDynamicWorld()->rayTest( from, to, cb );
 
 	return cb;
+}
+
+WayPoint * World::AddWayPoint( const CVector3 & pos ){
+	WayPoint* wp = NewGO<WayPoint>( 0 );
+	wayPoints.push_back( wp );
+	wp->SetPos( pos );
+	return wp;
 }

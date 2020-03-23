@@ -1,9 +1,19 @@
 #pragma once
 #include "Ground/CollisionModel.h"
 
+class WayPoint;
+class Loot;
+
+struct Edge{
+	Edge( WayPoint* wp, float length ) : wp( wp ), length( length ){}
+	WayPoint* wp = nullptr;
+	float length = 0;
+};
+
 class WayPoint : public IGameObject{
 public:
 	WayPoint();
+	~WayPoint();
 
 	void Update() override{}
 
@@ -24,8 +34,29 @@ public:
 		}
 	}
 
+	float Distance( WayPoint* wp ){
+		return ( wp->GetPos() - GetPos() ).Length();
+	}
+
+	void Connect( WayPoint* wayP ){
+		ConnectOneWay( wayP );
+		wayP->ConnectOneWay( this );
+	}
+
+	void ConnectOneWay( WayPoint* wayP ){
+		connections.emplace_back( wayP ,Distance(wayP));
+	}
+
+	Loot* CreateLoot();
+
+	void DeleteLoot( Loot* );
+
 private:
 	bool isSelect = false;
+
+	std::vector<Edge> connections;
+
+	std::vector<Loot*> loots;
 
 	CollisionModel collision;
 };

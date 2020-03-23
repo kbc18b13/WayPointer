@@ -1,9 +1,11 @@
 #pragma once
 #include "Ground/CollisionModel.h"
 
+class WayPoint;
+
 class Loot : public IGameObject{
 public:
-	Loot();
+	Loot(WayPoint* start);
 
 	void Update() override{
 	}
@@ -16,6 +18,8 @@ public:
 		collision.SetPos( pos );
 	}
 
+	void SetTargetWayPoint( WayPoint* wp );
+
 	void SetTargetPos( const CVector3& pos );
 
 	void SetRot( const CQuaternion& rot ){
@@ -27,6 +31,9 @@ public:
 	}
 
 private:
+	WayPoint* start;
+	WayPoint* end = nullptr;
+
 	CollisionModel collision;
 };
 

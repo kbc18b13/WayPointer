@@ -1,10 +1,19 @@
 #include "stdafx.h"
 #include "Loot.h"
+#include "WayPoint.h"
 #include "physics/CollisionAttr.h"
 
-Loot::Loot() : collision( L"Assets/modelData/Loot.cmo" , nullptr , btCollisionObject::CollisionFlags::CF_Loot){
+Loot::Loot(WayPoint* start) : start(start),
+collision( L"Assets/modelData/Loot.cmo" , nullptr , btCollisionObject::CollisionFlags::CF_Loot){
 	collision.SetPointer( this );
 	collision.SetIndex( enCollisionAttr_Loot );
+
+	SetPos( start->GetPos() );
+}
+
+void Loot::SetTargetWayPoint( WayPoint * wp ){
+	SetTargetPos( wp->GetPos() );
+	end = wp;
 }
 
 void Loot::SetTargetPos( const CVector3 & pos ){
