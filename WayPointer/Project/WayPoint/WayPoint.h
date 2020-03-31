@@ -1,5 +1,6 @@
 #pragma once
 #include "Ground/CollisionModel.h"
+#include <fstream>
 
 class WayPoint;
 class Loot;
@@ -51,6 +52,16 @@ public:
 
 	void DeleteLoot( Loot* );
 
+	void SetNumber( uint32_t number ){
+		m_number = number;
+	}
+
+	uint32_t GetNumber(){
+		return m_number;
+	}
+
+	void WriteData( std::ofstream& ofs );
+
 private:
 	bool isSelect = false;
 
@@ -59,5 +70,7 @@ private:
 	std::vector<Loot*> loots;
 
 	CollisionModel collision;
+
+	uint32_t m_number = 0;
 };
 

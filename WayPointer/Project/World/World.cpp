@@ -4,6 +4,7 @@
 #include "graphics/SkinModelRender.h"
 #include "WayPoint/WayPoint.h"
 #include "WayPoint/Loot.h"
+#include "util/FileUtil.h"
 
 World::World() : ground( L"Assets/modelData/FirstStage.cmo" ){
 	ground.SetIndex( enCollisionAttr_Ground );
@@ -22,6 +23,7 @@ void World::Update(){
 	camera.Update();
 	mouseLB.Update();
 	mouseRB.Update();
+	saveB.Update();
 
 	//ÉãÅ[Égåöê›íÜ
 	if( creatingLoot ){
@@ -85,6 +87,25 @@ void World::Update(){
 				}
 			}
 		}
+	} else if( saveB.IsTrigger() ){
+
+		std::ofstream ofs( "wayPoint.wpdata", std::ios::binary);
+		if( !ofs ){
+			abort();
+		}
+		BinaryOFS bfs( ofs );
+
+		bfs.writeBinary( static_cast<uint32_t>(wayPoints.size()) );
+
+		int wayPNum = 0;
+		for( WayPoint* wp : wayPoints ){
+			wp->SetNumber( wayPNum );
+			wayPNum++;
+		}
+		for( WayPoint* wp : wayPoints ){
+			wp->WriteData( ofs );
+		}
+
 	}
 }
 

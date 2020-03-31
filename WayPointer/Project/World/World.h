@@ -23,6 +23,7 @@ private:
 
 	KeyTrigger mouseLB{ VK_LBUTTON};
 	KeyTrigger mouseRB{ VK_RBUTTON };
+	KeyTrigger saveB{ 'P' };
 
 	std::vector<WayPoint*> wayPoints;
 

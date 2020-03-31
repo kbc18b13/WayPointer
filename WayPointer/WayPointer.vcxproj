@@ -164,6 +164,7 @@
     </MeshContentTask>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="Project\Util\FileUtil.h" />
     <ClInclude Include="Project\Util\KeyTrigger.h" />
     <ClInclude Include="Project\Camera\Camera.h" />
     <ClInclude Include="Project\Ground\CollisionModel.h" />
@@ -173,6 +174,7 @@
     <ClInclude Include="Project\WayPoint\WayPoint.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Project\Util\FileUtil.cpp" />
     <ClCompile Include="Project\Camera\Camera.cpp" />
     <ClCompile Include="Project\Ground\CollisionModel.cpp" />
     <ClCompile Include="Project\main.cpp" />
